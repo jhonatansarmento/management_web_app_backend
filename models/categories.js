@@ -1,10 +1,10 @@
 const connection = require('../database/connection');
 
-class Device {
-  create(device, res) {
-    const sql = 'INSERT INTO devices SET ?'
+class Category {
+  create(category, res) {
+    const sql = 'INSERT INTO categories SET ?'
 
-    connection.query(sql, device, (erro, results) => {
+    connection.query(sql, category, (erro, results) => {
       if (erro)
         res.json(erro);
       else {
@@ -14,7 +14,7 @@ class Device {
   }
 
   read(res) {
-    const sql = 'SELECT devices.*, categories.name AS category_name FROM devices LEFT JOIN categories ON devices.category = categories.id ORDER BY devices.id'
+    const sql = 'SELECT * FROM categories;';
 
     connection.query(sql, (erro, results) => {
       if (erro)
@@ -26,8 +26,7 @@ class Device {
 
   delete(req, res) {
     const { id } = req.params;
-
-    const sql = "DELETE FROM devices WHERE id = " + id + ";";
+    const sql = "DELETE FROM categories WHERE id = " + id + ";"
 
     connection.query(sql, (error, results) => {
       if (error)
@@ -38,4 +37,4 @@ class Device {
   }
 }
 
-module.exports = new Device
+module.exports = new Category
