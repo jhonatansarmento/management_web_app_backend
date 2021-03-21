@@ -1,6 +1,17 @@
-const customExpress = require('./config/customExpress')
+const customExpress = require('./config/customExpress');
+const connection = require('./database/connection');
+const table = require('./database/table');
 
-const app = customExpress()
+connection.connect(error => {
+  if (error)
+    console.log(error)
+  else {
+    console.log('conectado com sucesso!')
 
-app.listen(3000)
+    table.init(connection);
 
+    const app = customExpress();
+
+    app.listen(3000, () => console.log('servidor rodando'));
+  }
+});
