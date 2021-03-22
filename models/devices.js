@@ -1,10 +1,10 @@
 const connection = require('../database/connection');
 
 class Device {
-  create(device, res) {
+  async create(device, res) {
     const sql = 'INSERT INTO devices SET ?'
 
-    connection.query(sql, device, (erro, results) => {
+    await connection.query(sql, device, (erro, results) => {
       if (erro)
         res.json(erro);
       else {
@@ -13,10 +13,10 @@ class Device {
     })
   }
 
-  read(res) {
+  async read(res) {
     const sql = 'SELECT devices.*, categories.name AS category_name FROM devices LEFT JOIN categories ON devices.category = categories.id ORDER BY devices.id'
 
-    connection.query(sql, (erro, results) => {
+    await connection.query(sql, (erro, results) => {
       if (erro)
         res.json(erro);
       else
@@ -24,12 +24,12 @@ class Device {
     })
   }
 
-  delete(req, res) {
+  async delete(req, res) {
     const { id } = req.params;
 
     const sql = "DELETE FROM devices WHERE id = " + id + ";";
 
-    connection.query(sql, (error, results) => {
+    await connection.query(sql, (error, results) => {
       if (error)
         res.json(error);
       else

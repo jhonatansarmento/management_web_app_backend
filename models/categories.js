@@ -1,10 +1,10 @@
 const connection = require('../database/connection');
 
 class Category {
-  create(category, res) {
+  async create(category, res) {
     const sql = 'INSERT INTO categories SET ?'
 
-    connection.query(sql, category, (erro, results) => {
+    await connection.query(sql, category, (erro, results) => {
       if (erro)
         res.json(erro);
       else {
@@ -13,10 +13,10 @@ class Category {
     })
   }
 
-  read(res) {
+  async read(res) {
     const sql = 'SELECT * FROM categories;';
 
-    connection.query(sql, (erro, results) => {
+    await connection.query(sql, (erro, results) => {
       if (erro)
         res.json(erro);
       else
@@ -24,11 +24,11 @@ class Category {
     })
   }
 
-  delete(req, res) {
+  async delete(req, res) {
     const { id } = req.params;
     const sql = "DELETE FROM categories WHERE id = " + id + ";"
 
-    connection.query(sql, (error, results) => {
+    await connection.query(sql, (error, results) => {
       if (error)
         res.json(error);
       else
