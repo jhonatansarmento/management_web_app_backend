@@ -1,3 +1,4 @@
+require('dotenv').config()
 const customExpress = require('./config/customExpress');
 const connection = require('./database/connection');
 const table = require('./database/table');
