@@ -14,14 +14,14 @@ class Tables {
       if (erro)
         console.log(erro)
       else
-        console.log('Tabela Devices criada com sucesso!');
+        console.log('Table device created');
     });
 
     this.connection.query(createTableCategoriesSql, (erro) => {
       if (erro)
         console.log(erro)
       else
-        console.log('Tabela Categories criada com sucesso!');
+        console.log('Table category created');
     });
 
   }
